@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Sobs.ViewModels"
+        x:Class="Sobs.Views.ProjectWizardWindow"
+        x:DataType="vm:ProjectWizardWindowViewModel"
+        Width="600" Height="450"
+        Background="gray"
+        WindowStartupLocation="CenterScreen"
+        Title="Project Setup Wizard">
+    <Grid RowDefinitions="Auto,* ,Auto" Margin="20">
+        
+        <StackPanel Grid.Row="0" Spacing="10">
+            <TextBlock Text="Sobs" FontSize="18" FontWeight="Bold"/>
+            <Rectangle Height="5" Fill="Transparent"/>
+            <TextBlock Text="{Binding ProjectName}" FontWeight="Bold"/>
+            <Rectangle Height="20" Fill="Transparent"/>
+        </StackPanel>
+
+
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto">
+          <TextBlock Text="Step:" FontWeight="Bold" Grid.Column="0"/>
+          <TextBlock Text="{Binding CurrentStep}" Grid.Column="1" FontSize="16" Foreground="White" HorizontalAlignment="Center"/>
+          <TextBlock Text="{Binding StepDescription}" Grid.Column="2" FontSize="16" Foreground="White"/>
+        </Grid>
+        
+        
+
+        <!-- the back adn next button -->
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
+            <Button Content="Back" Command="{Binding GoBackCommand}" Background="Black" Foreground="White" Grid.Column="0" Width="100" HorizontalAlignment="Left"/>
+            <Button Content="Next" Command="{Binding GoNextCommand}" Background="Black" Foreground="White" Grid.Column="2" Width="100" HorizontalAlignment="Right"/>
+        </Grid>
+    </Grid>
+</Window>
