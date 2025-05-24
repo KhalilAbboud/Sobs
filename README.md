@@ -1,2 +1,2 @@
 # Sobs
-encarde par mohajir
+# FYP project
