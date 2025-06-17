@@ -3,32 +3,199 @@
         xmlns:vm="clr-namespace:Sobs.ViewModels"
         x:Class="Sobs.Views.ProjectWizardWindow"
         x:DataType="vm:ProjectWizardWindowViewModel"
-        Width="600" Height="450"
-        Background="gray"
+        Icon="/Assets/avalonia-logo.ico"
+        x:Name="Root"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Sobs.Converters"
+        Width="900" Height="650"
+        MinWidth="900"
+        MinHeight="650"
+        Background="#112D4E"
         WindowStartupLocation="CenterScreen"
-        Title="Project Setup Wizard">
-    <Grid RowDefinitions="Auto,* ,Auto" Margin="20">
-        
+        Title="Task Setup Wizard">
+
+        <Window.Resources>
+            <local:NullToBoolConverter x:Key="NullToBoolConverter"/>
+        </Window.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="20">
+        <!-- Header of the window -->
         <StackPanel Grid.Row="0" Spacing="10">
-            <TextBlock Text="Sobs" FontSize="18" FontWeight="Bold"/>
-            <Rectangle Height="5" Fill="Transparent"/>
-            <TextBlock Text="{Binding ProjectName}" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Center"
+                    FontSize="30"
+                    FontWeight="Bold">
+                <TextBlock.Inlines>
+                    <Underline>
+                    <Run Text="{Binding TaskName}"/>
+                    </Underline>
+                </TextBlock.Inlines>
+            </TextBlock>
+            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Width="300">
+                <TextBlock.Inlines>
+                    <Underline>"-Task's Description: "</Underline>
+                </TextBlock.Inlines>
+            </TextBlock>
+            <TextBox Text="{Binding TaskNotes}" HorizontalAlignment="Left"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="100"
+                     Width="300"
+                     Background="#3F72AF"
+                     Foreground="White"/>
             <Rectangle Height="20" Fill="Transparent"/>
         </StackPanel>
 
+        <!-- Main content -->
+        <Grid Grid.Row="1" ColumnDefinitions="2*,Auto">
+            <Rectangle Grid.ColumnSpan="2" Fill="#3F72AF" RadiusX="10" RadiusY="10" Margin="0"/>
 
-        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto">
-          <TextBlock Text="Step:" FontWeight="Bold" Grid.Column="0"/>
-          <TextBlock Text="{Binding CurrentStep}" Grid.Column="1" FontSize="16" Foreground="White" HorizontalAlignment="Center"/>
-          <TextBlock Text="{Binding StepDescription}" Grid.Column="2" FontSize="16" Foreground="White"/>
-        </Grid>
-        
-        
+            <!-- ComboBox and person selection -->
+            <StackPanel Grid.Column="0" Spacing="1" Margin="15" HorizontalAlignment="Left">
+                <TextBlock Text="-Select The Person Responsible for the Task"
+                           Foreground="White" FontWeight="Bold"
+                           Width="300"/>
 
-        <!-- the back adn next button -->
-        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
-            <Button Content="Back" Command="{Binding GoBackCommand}" Background="Black" Foreground="White" Grid.Column="0" Width="100" HorizontalAlignment="Left"/>
-            <Button Content="Next" Command="{Binding GoNextCommand}" Background="Black" Foreground="White" Grid.Column="2" Width="100" HorizontalAlignment="Right"/>
+                <ComboBox Width="300" Height="35"
+                          ItemsSource="{Binding AllPeopleOptions}"
+                          SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
+                          HorizontalAlignment="Left"
+                          Background="#112D4E"
+                          Foreground="White"
+                          PlaceholderText="Select a person">
+                    <!-- Custom display in dropdown list -->
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="LightGray"
+                                       VerticalAlignment="Center">
+                                <TextBlock.Inlines>
+                                    <Run Text="["/>
+                                    <Run Text="{Binding Role}" FontWeight="Bold"/>
+                                    <Run Text="] "/>
+                                    <Run Text="{Binding Name}"/>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                    <ComboBox.SelectionBoxItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="White"
+                                       VerticalAlignment="Center">
+                                <TextBlock.Inlines>
+                                    <Run Text="{Binding Role}" FontWeight="Bold"/>
+                                    <Run Text=" - "/>
+                                    <Run Text="{Binding Name}"/>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.SelectionBoxItemTemplate>
+                </ComboBox>
+
+                <!-- Selected person summary -->
+                <TextBlock Margin="0,4,0,0"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           FontSize="15"
+                           Text = "{Binding SelectedPersonDisplay}">
+                </TextBlock>
+
+                <!-- StackPanel for additional stuff -->
+                <!-- fields that are under the dropbox -->
+                <!-- ──────────────────────── the left side ─────────────────────── -->
+
+                    <StackPanel Spacing="4" Width="300">                    
+                    <!-- Scope and Boundaries -->
+                    <TextBlock Text="-Scope and Boundaries:" Foreground="White" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBox Text="{Binding ScopeAndBoundaries}" 
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Height="80"
+                            Width="300"
+                            Background="Black"
+                            Foreground="White"
+                            Watermark="Describe scope here"/>
+
+                    <!-- Constraints and Risks -->
+                    <TextBlock Text="-Constraints and Risks:" Foreground="White" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <TextBox Text="{Binding ConstraintsAndRisks}" 
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Height="80"
+                            Width="300"
+                            Background="Black"
+                            Foreground="White"
+                            Watermark="List constraints/risks here"/>
+                    </StackPanel>
+                    <!-- ──────────────────────── the right side ─────────────────────── -->
+            </StackPanel>
+            <!-- Priority level meter -->
+            <StackPanel Grid.Column="1" 
+                        HorizontalAlignment="Right" 
+                        Margin="10" 
+                        Spacing="8">
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            Spacing="8">
+                    <TextBlock Text="-Priority Level" 
+                            FontWeight="Bold" 
+                            Foreground="White" 
+                            Margin="0"/>
+                    <Slider Minimum="20" Maximum="80" 
+                            TickFrequency="20" 
+                            TickPlacement="BottomRight"
+                            IsSnapToTickEnabled="True" 
+                            Value="{Binding PriorityLevel}" 
+                            Width="200" Margin="0"/>
+                    <TextBlock Text="{Binding PriorityLevelName}" 
+                            Foreground="{Binding PriorityLevelColor}"
+                            FontWeight="Bold" 
+                            Margin="0" MinWidth="70"/> 
+                </StackPanel>               
+            <!-- Start Date -->
+                    <TextBlock Text="-Start Date:" Foreground="White" FontWeight="Bold"/>
+                    <DatePicker SelectedDate="{Binding StartTime, Mode=TwoWay}"
+                                Width="300"
+                                HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding StartTimeWarning}" Foreground="OrangeRed" FontSize="15"/>
+
+            <!-- End Date -->
+                    <TextBlock Text="-End Date:" Foreground="White" FontWeight="Bold" Margin="0,4,0,0"/>
+                    <DatePicker SelectedDate="{Binding EndTime, Mode=TwoWay}"
+                                Width="300"
+                                HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding EndTimeWarning}" Foreground="OrangeRed" FontSize="15"/>
+                    <TextBlock Text="Select report type:" 
+                                Foreground="White"
+                                FontWeight="Bold"
+                                Margin="0,10,0,0"/>
+            <!-- ─────────────── Report/presentaion/documentation selection ─────────────── -->
+                    <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,4,0,0">
+                        <CheckBox   Content="Code Documentation"
+                                    IsChecked="{Binding GenerateCodeDocumentation, Mode=TwoWay}"
+                                    Foreground="White"/>
+                        <CheckBox   Content="Task Report"
+                                    IsChecked="{Binding GenerateTaskReport, Mode=TwoWay}"
+                                    Foreground="White"/>
+                    </StackPanel>
+                </StackPanel>
+                </Grid>
+
+        <!-- Confirm button -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto,*">
+            <StackPanel Grid.Column="1" Spacing="15" Margin="15" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Confirm" 
+                        Command="{Binding ConfirmCommand}"
+                        IsEnabled="{Binding CanConfirm}"
+                        Background="Black" Foreground="White" Width="120"/>
+        <!-- to the database button-->
+                <Button Content="Save to Database"
+                        Command="{Binding DbConfirmCommand}"
+                        IsEnabled="{Binding CanConfirm}"
+                        Background="DarkGreen"
+                        Foreground="White"
+                        Width="150"
+                        Margin="10,0,0,0"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

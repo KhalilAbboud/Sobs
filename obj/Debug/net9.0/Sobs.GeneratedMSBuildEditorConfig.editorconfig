@@ -20,35 +20,41 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Sobs
-build_property.ProjectDir = C:\Users\nx\Desktop\PFE\vscodefolder\Sobsgithub\
+build_property.ProjectDir = C:\Users\nx\Desktop\PFE\vscodefolder\Sobsgithub\Sobs\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/App.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Assets/Icons.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Assets/Icons.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Views/ButtonPageView.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/ButtonPageView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Views/DbConnectivityView.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/DbConnectivityView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Views/HomePageView.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/HomePageView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Views/MainWindow.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/LoginWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Views/MessageWindow.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Views/ProjectWizardWindow.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/MessageWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Views/SettingsPageView.axaml]
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/ProjectWizardWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/SettingsPageView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/nx/Desktop/PFE/vscodefolder/Sobsgithub/Sobs/Views/UserDashboard.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

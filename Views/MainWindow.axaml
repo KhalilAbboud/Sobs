@@ -8,9 +8,11 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Sobs - Plan Your Projects"
-        Width="700"
-        Height="500"
-        CanResize="False">
+        Width="1200"
+        Height="600"
+        MinWidth="1200"
+        MinHeight="600"
+        CanResize="True">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -20,9 +22,9 @@
                OpenPaneLength="245"
                DisplayMode="CompactInline"
                CompactPaneLength="55"
-               Background="AliceBlue"
-               PaneBackground="Purple"
-               CornerRadius="6 6 6 6">
+               Background="White"
+               PaneBackground="#3F72AF"
+               CornerRadius="0 0 0 0">
         
         <SplitView.Pane>
             <DockPanel LastChildFill="True">
@@ -52,7 +54,7 @@
         
         <SplitView.Content>
             <Grid>
-                <Border CornerRadius="0 0 0 0" Background="#2d2d2d">
+                <Border CornerRadius="0 0 0 0" Background="#112D4E">
                     <TransitioningContentControl Content="{Binding CurrentPage}" />
                 </Border>
             </Grid>

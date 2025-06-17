@@ -7,15 +7,21 @@
              xmlns:viewModels="clr-namespace:Sobs.ViewModels"
              x:DataType="viewModels:ButtonPageViewModel">
 
-    <StackPanel Margin="10" Spacing="10">
-        <TextBlock Text="Make Your Project." FontSize="20" HorizontalAlignment="Center" />
-        <Button Content="Show Message" Command="{Binding ShowMessageCommand}" Width="150" />
-        <Button Content="Create File" Command="{Binding CreateFileCommand}" Width="150" />
+    <StackPanel Margin="10" Spacing="20" HorizontalAlignment="Center" >
+        <TextBlock Foreground="White" FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" Width="600">
+                <TextBlock.Inlines>
+                    <Underline>-Assign Your Task: </Underline>
+                </TextBlock.Inlines>
+            </TextBlock>
 
-        <TextBlock Text="Project Name:" Margin="0,20,0,5" />
-        <TextBox Width="200" Text="{Binding ProjectName, Mode=TwoWay}" />
+        <TextBlock Foreground="White" FontSize="30" FontWeight="Bold" HorizontalAlignment="Left" Width="300">
+                <TextBlock.Inlines>
+                    <Underline>Task Name: </Underline>
+                </TextBlock.Inlines>
+        </TextBlock>
 
-        <Button Content="Make A Project" Command="{Binding MakeProjectCommand}" Width="150" />
+        <TextBox Width="200" Text="{Binding TaskName, Mode=TwoWay}" />
+        <Button Content="Create Task" Command="{Binding MakeTaskCommand}" Width="180" HorizontalAlignment="Center"/>
     </StackPanel>
 
     

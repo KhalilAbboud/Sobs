@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs.csproj": {}
+    "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs\\Sobs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs.csproj": {
+    "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs\\Sobs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs.csproj",
+        "projectUniqueName": "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs\\Sobs.csproj",
         "projectName": "Sobs",
-        "projectPath": "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs.csproj",
+        "projectPath": "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs\\Sobs.csproj",
         "packagesPath": "C:\\Users\\nx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\obj\\",
+        "outputPath": "C:\\Users\\nx\\Desktop\\PFE\\vscodefolder\\Sobsgithub\\Sobs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -49,27 +49,31 @@
           "dependencies": {
             "Avalonia": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
+            },
+            "Avalonia.Controls.DataGrid": {
+              "target": "Package",
+              "version": "[11.3.0, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.Diagnostics": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.Fonts.Inter": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.ReactiveUI": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.Themes.Fluent": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "CommunityToolkit.Mvvm": {
               "target": "Package",

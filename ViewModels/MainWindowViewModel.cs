@@ -33,9 +33,9 @@ namespace Sobs.ViewModels
         public ObservableCollection<ListItemTemplate> Items { get; } = new()
         {
             new ListItemTemplate(typeof(HomePageViewModel), "HomeRegular", "Dashboard"),
-            new ListItemTemplate(typeof(ButtonPageViewModel), "CursorHoverOffRegular", "Projects Tool"),
-            new ListItemTemplate(typeof(DbConnectivityViewModel), "DatabaseRegular", "DB Connectivity"),
-            new ListItemTemplate(typeof(SettingsPageViewModel), "SettingsRegular", "Settings"),
+            new ListItemTemplate(typeof(ButtonPageViewModel), "CursorHoverOffRegular", "Task Maker Tool"),
+            new ListItemTemplate(typeof(DbConnectivityViewModel), "DatabaseRegular", "DB Verification"),
+
         };
 
         [RelayCommand]
@@ -47,14 +47,9 @@ namespace Sobs.ViewModels
         [RelayCommand]
         private void NavigateToDbConnectivity()
         {
-            CurrentPage = new DbConnectivityViewModel(); // Passing the DbStateService instance here
+            CurrentPage = new DbConnectivityViewModel();
         }
-
-        [RelayCommand]
-        private void NavigateToSettings()
-        {
-            CurrentPage = new SettingsPageViewModel();
-        }
+                
     }
 
     public class ListItemTemplate

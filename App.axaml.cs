@@ -11,6 +11,8 @@ namespace Sobs;
 
 public partial class App : Application
 {
+    public static bool IsDatabaseConnected = false;
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -22,14 +24,11 @@ public partial class App : Application
         {
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
-            
-            // Remove the code related to DbStateService
 
+            desktop.MainWindow = new LoginWindow();
+            
             DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel()  // No longer passing DbStateService
-            };
+            
         }
 
         base.OnFrameworkInitializationCompleted();

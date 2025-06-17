@@ -2,11 +2,121 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Sobs.Views.HomePageView">
-    <TextBlock  Margin="5" 
-                FontFamily="20.3661L22" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"
-                > ok hope this works now</TextBlock>
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:Sobs.ViewModels"
+             xmlns:models="clr-namespace:Sobs.Models"
+             xmlns:conv="clr-namespace:Sobs.Converters"
+             xmlns:local="clr-namespace:Sobs.Converters"
+             x:Class="Sobs.Views.HomePageView"
+             x:DataType="viewModels:HomePageViewModel"
+             d:DesignWidth="800"
+             d:DesignHeight="450">
+    <!-- this is a way to conver the ture/false to yes/no in the table -->
+    <UserControl.Resources>
+      <local:DateToShortStringConverter x:Key="DateToShortStringConverter"/>
+    </UserControl.Resources>
+
+  <UserControl.DataContext>
+    <viewModels:HomePageViewModel/>
+  </UserControl.DataContext>
+
+  <Grid RowDefinitions="Auto,*,Auto" Margin="10" ColumnDefinitions="*">
+
+    <StackPanel Grid.Row="1" Spacing="0">
+    <!-- top of the table -->
+    <Border Background="#2D3E50" Padding="8" CornerRadius="4" Margin="0,0,0,4">
+        <StackPanel Orientation="Horizontal" Spacing="4">
+        <TextBlock Text="ID"            Width="60"  FontWeight="Bold" Margin="2"/>
+        <TextBlock Text="Name"          Width="200" FontWeight="Bold" Margin="2"/>
+        <TextBlock Text="Responsible"   Width="150" FontWeight="Bold" Margin="2"/>
+        <TextBlock Text="Priority"      Width="110"  FontWeight="Bold" Margin="2"/>
+        <TextBlock Text="Start Date"    Width="80" FontWeight="Bold" Margin="2"/>
+        <TextBlock Text="End Date"      Width="80" FontWeight="Bold" Margin="2"/>
+        <TextBlock Text="Documented"    Width="130" FontWeight="Bold" Margin="2"/>
+        <TextBlock Text="Presented"    Width="130" FontWeight="Bold" Margin="2"/>
+        </StackPanel>
+    </Border>
+
+    <!-- the dtabase stuff -->
+    <ListBox Grid.Row="1"
+             ItemsSource="{Binding Tasks}"
+             SelectedItem="{Binding SelectedTask, Mode=TwoWay}"
+             Height="300"
+             Margin="0,1,0,5"
+             BorderBrush="#3A4A65"
+             BorderThickness="1"
+             Background="#1E272F"
+             Foreground="White">
+
+        <!-- Global ListBoxItem styling for the table elements -->
+      <ListBox.Styles>
+        <!-- the Base style -->
+        <Style Selector="ListBoxItem">
+          <Setter Property="Padding" Value="6,4"/>
+          <Setter Property="Margin" Value="0,0,0,2"/>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <!-- Alternating row shading of colors -->
+        <Style Selector="ListBoxItem:nth-child(2n)">
+          <Setter Property="Background" Value="#253043"/>
+        </Style>
+        <!-- Hovering effect -->
+        <Style Selector="ListBoxItem:pointerover">
+          <Setter Property="Background" Value="#32405B"/>
+        </Style>
+        <!-- Selected row effect (noraml selection) -->
+        <Style Selector="ListBoxItem:selected">
+          <Setter Property="Background" Value="#405673"/>
+        </Style>
+      </ListBox.Styles>
+
+      <ListBox.ItemTemplate>
+        <DataTemplate x:DataType="models:TaskModel">
+          <StackPanel Orientation="Horizontal" Spacing="6" Margin="2">
+            <TextBlock Text="{Binding TaskID}"          Width="50"  Margin="2,0"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"            Width="200" Margin="2,0"/>
+            <TextBox Text="{Binding Responsible, Mode=TwoWay}"     Width="150" Margin="2,0"/>
+            <ComboBox SelectedItem="{Binding Priority, Mode=TwoWay}"
+              Width="110" Margin="2,0">
+              <ComboBox.Items>
+                  <x:String>Low</x:String>
+                  <x:String>Moderate</x:String>
+                  <x:String>High</x:String>
+                  <x:String>Crucial</x:String>
+              </ComboBox.Items>
+          </ComboBox>
+            <TextBox Width="80" 
+            Text="{Binding StartDate, Mode=TwoWay, Converter={StaticResource DateToShortStringConverter}}"  Padding="0"  Margin="0"/>
+            <TextBox Width="80" 
+            Text="{Binding EndDate, Mode=TwoWay, Converter={StaticResource DateToShortStringConverter}}"  Padding="0"  Margin="0"/>
+
+            <CheckBox IsChecked="{Binding IsDocumented, Mode=TwoWay}" Content="Documented"    Width="130" Margin="2,0"/>
+            <CheckBox IsChecked="{Binding IsPresented, Mode=TwoWay}"  Content="Presented"     Width="130" Margin="2,0"/>
+            <Button Content="Save"
+            Command="{Binding $parent[UserControl].DataContext.SaveTaskCommand}"
+            CommandParameter="{Binding}"
+            Width="50"
+            Margin="4,0"/>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+    </StackPanel>
+
+    <!-- a random count cuz why not lol -->
+    <StackPanel  Grid.Row="3" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center" Margin="0,10,0,8">
+      <Button Content="Refresh Elements"
+              Command="{Binding ReloadCommand}"
+              Width="150"/>
+      <Button Content="Delete a Task"
+              Command="{Binding DeleteCommand}"
+              Width="140"/>
+      
+    </StackPanel>
+    <TextBlock Grid.Row="2"
+               Text="{Binding Tasks.Count, StringFormat=Total Tasks: {0}}"
+               FontWeight="Bold"
+               Margin="0,4,0,0"
+               Foreground="White"/>
+  </Grid>
 </UserControl>

@@ -14,35 +14,6 @@ namespace Sobs.ViewModels
 {
     public partial class ButtonPageViewModel : ViewModelBase
     {
-    
-        [RelayCommand]
-        private async Task ShowMessage()
-        {
-            var window = TryFindMainWindow();
-            if (window is not null)
-            {
-                var messageWindow = new MessageWindow("It works!");
-                await messageWindow.ShowDialog(window);
-            }
-        }
-
-        [RelayCommand]
-        private async Task CreateFile()
-        {
-            var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sobs");
-            Directory.CreateDirectory(folderPath);
-
-            var filePath = Path.Combine(folderPath, "testfile.txt");
-            await File.WriteAllTextAsync(filePath, "so this thing does work");
-
-            
-            var window = TryFindMainWindow();
-            if (window is not null)
-            {
-                var messageWindow = new MessageWindow($"File created at:\n{filePath}");
-                await messageWindow.ShowDialog(window);
-            }
-        }
 
         private Window? TryFindMainWindow()
         {
@@ -51,15 +22,58 @@ namespace Sobs.ViewModels
                 : null;
         }
 
+
+        //private readonly DbConnectivityViewModel _dbConnectivityViewModel;
+
         [ObservableProperty]
-        private string projectName = string.Empty;
+        private string taskName = string.Empty;
         [RelayCommand]
-        private async Task MakeProject(){
+        private async Task MakeTask(){
             var window = TryFindMainWindow();
             if(window is not null){
-                var projectWindow = new ProjectWizardWindow(projectName); // window for later meh meh
+                if (!App.IsDatabaseConnected)
+                {
+                    await ShowErrorAsync("Verify your Database Connection Credentials first.");
+                    return;
+                }
+
+
+                if (string.IsNullOrWhiteSpace(TaskName))
+                {
+                    await ShowErrorAsync("Please enter a Proper Task name.");
+                    return;
+                }
+
+                var projectWindow = new ProjectWizardWindow(TaskName);               
                 await projectWindow.ShowDialog(window);
             }
-        } 
+        }
+
+
+        private async Task ShowErrorAsync(string message)
+        {
+            var errorWindow = new Window
+            {
+                Title = "Error",
+                Width = 300,
+                Height = 150,
+                Content = new TextBlock
+                {
+                    Text = message,
+                    VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                    TextWrapping = Avalonia.Media.TextWrapping.Wrap,
+                    Margin = new Thickness(20)
+                }
+        };
+        var mainWindow = TryFindMainWindow();
+            if (mainWindow is not null){            
+                await errorWindow.ShowDialog(mainWindow);
+            }
+            else{           
+                errorWindow.Show();
+            }
+        }
+        public bool IsDatabaseConnected { get; set; } = false; 
     }
 }

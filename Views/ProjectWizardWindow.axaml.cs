@@ -6,15 +6,16 @@ namespace Sobs.Views
 {
     public partial class ProjectWizardWindow : Window
     {
-        public ProjectWizardWindow(string projectName)
+        public ProjectWizardWindow(string taskName)
         {
             InitializeComponent();
-            DataContext = new ProjectWizardWindowViewModel(projectName);
+            DataContext = new ProjectWizardWindowViewModel(taskName);
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
+        
     }
 }

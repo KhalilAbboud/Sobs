@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Sobs.ViewModels"
+        Icon="/Assets/avalonia-logo.ico"
+        x:Class="Sobs.Views.LoginWindow"
+        x:DataType="vm:LoginViewModel"
+        Background="#112D4E"
+        Title="Login"
+        Width="400" Height="300"
+        mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:LoginViewModel />
+    </Design.DataContext>
+
+    <Window.DataContext>
+        <vm:LoginViewModel />
+    </Window.DataContext>
+
+    <StackPanel Background="#3F72AF" Margin="30" Spacing="10" VerticalAlignment="Center">
+        <TextBlock FontFamily="Segoe UI, Arial, sans-serif"
+           FontWeight="SemiBold" FontSize="24" HorizontalAlignment="Center">
+           <Underline>SOBS</Underline>
+        </TextBlock>
+        
+        <TextBlock Text="Username" FontFamily="Segoe UI, Arial, sans-serif"
+           FontWeight="SemiBold" HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Username, Mode=TwoWay}" Width="250"/>
+
+        <TextBlock Text="Password" FontFamily="Segoe UI, Arial, sans-serif"
+           FontWeight="SemiBold" HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Password, Mode=TwoWay}" Width="250" PasswordChar="●"/>
+
+        <Button Content="Login" Command="{Binding LoginCommand}" Width="100" HorizontalAlignment="Center"/>
+        <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>
